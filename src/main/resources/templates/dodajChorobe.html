@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj chorobę</title>
+</head>
+<body>
+<h1>Dodaj nową chorobę</h1>
+
+<form th:action="@{/save}" th:object="${choroby}" method="post">
+    <input type="text" th:field="*{nazwa_choroby}" placeholder="Nazwa choroby"><br>
+    <input type="number" th:field="*{waga_choroby}" placeholder="Waga choroby"><br>
+    <input type="number" th:field="*{dlugosc_operacji}" placeholder="Dlugosc operacji"><br>
+    <button type="submit">Zapisz</button>
+</form>
+</body>
+</html>

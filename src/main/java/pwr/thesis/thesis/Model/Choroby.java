@@ -1,15 +1,13 @@
 package pwr.thesis.thesis.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Choroby {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private int idChoroby;
     private String nazwa_choroby;
     private int Waga_choroby;
