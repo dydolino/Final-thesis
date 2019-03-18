@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wszystkie choroby</title>
+</head>
+<body>
+<ol>
+    <li th:each="chroba: ${choroby}" th:text="${chroba.idChoroby}"></li>
+</ol>
+
+</body>
+</html>
