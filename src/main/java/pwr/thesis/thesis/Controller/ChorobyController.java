@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pwr.thesis.thesis.Model.Choroby;
 import pwr.thesis.thesis.Repository.ChorobyRepository;
+import pwr.thesis.thesis.Service.ChorobyService;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +18,14 @@ import java.util.Optional;
 public class ChorobyController {
 
     private ChorobyRepository chorobyRepository;
+    private ChorobyService chorobyService;
+
+
 
     @Autowired
-    public ChorobyController(ChorobyRepository chorobyRepository) {
+    public ChorobyController(ChorobyRepository chorobyRepository, ChorobyService chorobyService) {
         this.chorobyRepository = chorobyRepository;
+        this.chorobyService = chorobyService;
     }
 
     @GetMapping("/")
@@ -55,5 +60,12 @@ public class ChorobyController {
     public String deleteChoroba(@PathVariable Long id){
         chorobyRepository.deleteById(id);
         return "Usunieto chorobe o id "+id;
+    }
+
+    @GetMapping("/update/{id}")
+    @ResponseBody
+    public String update(@PathVariable Long id){
+        chorobyService.update(id);
+        return "Zaktualizowano obiekt o id "+id;
     }
 }

@@ -9,4 +9,6 @@ public interface ChorobyRepository extends JpaRepository<Choroby,Long> {
 
 
     Optional<Choroby> findByNazwaIgnoreCase(String nazwa);
+
+    Optional<Choroby> findByIdChoroby(Long id);
 }
