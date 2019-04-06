@@ -3,30 +3,32 @@ package pwr.thesis.thesis.Model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "choroby")
 public class Choroby {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private int idChoroby;
-    private String nazwa_choroby;
+    private Long idChoroby;
+    private String nazwa;
     private int Waga_choroby;
     private double Dlugosc_operacji;
 
-    public int getIdChoroby() {
+    public Long getIdChoroby() {
         return idChoroby;
     }
 
-    public void setIdChoroby(int idChoroby) {
+    public void setIdChoroby(Long idChoroby) {
         this.idChoroby = idChoroby;
     }
 
-    public String getNazwa_choroby() {
-        return nazwa_choroby;
+    public String getNazwa() {
+        return nazwa;
     }
 
-    public void setNazwa_choroby(String nazwa_choroby) {
-        this.nazwa_choroby = nazwa_choroby;
+    public void setNazwa(String nazwa) {
+        this.nazwa = nazwa;
     }
 
     public int getWaga_choroby() {

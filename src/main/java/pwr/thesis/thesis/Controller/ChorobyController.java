@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.Model.Choroby;
 import pwr.thesis.thesis.Repository.ChorobyRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ChorobyController {
@@ -28,15 +30,22 @@ public class ChorobyController {
 
     @PostMapping("save")
     public String addChoroba(Choroby choroby) {
+
         chorobyRepository.save(choroby);
         return "success";
     }
 
     @GetMapping("/allChoroby")
     public String allChoroby(Model model) {
-        List<Choroby>allChoroby=chorobyRepository.findAll();
-        model.addAttribute("choroby", allChoroby);
+        List<Choroby> allChorobys=chorobyRepository.findAll();
+        model.addAttribute("choroby", allChorobys);
         return "allChoroby";
     }
 
+    @GetMapping("/choroba/{nazwa}")
+    public String getChoroba(Model model, @PathVariable String nazwa){
+        Optional<Choroby> chrobaByNazwa = chorobyRepository.findByNazwaIgnoreCase(nazwa);
+        chrobaByNazwa.ifPresent(choroby -> model.addAttribute("choroba",choroby));
+        return chrobaByNazwa.map(choroby -> "singleChoroba").orElse("noChoroba");
+    }
 }

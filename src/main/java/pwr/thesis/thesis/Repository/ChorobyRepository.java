@@ -3,5 +3,10 @@ package pwr.thesis.thesis.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pwr.thesis.thesis.Model.Choroby;
 
-public interface ChorobyRepository extends JpaRepository<Choroby,Integer> {
+import java.util.Optional;
+
+public interface ChorobyRepository extends JpaRepository<Choroby,Long> {
+
+
+    Optional<Choroby> findByNazwaIgnoreCase(String nazwa);
 }
