@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pwr.thesis.thesis.Model.Choroby;
 import pwr.thesis.thesis.Repository.ChorobyRepository;
 
@@ -47,5 +48,12 @@ public class ChorobyController {
         Optional<Choroby> chrobaByNazwa = chorobyRepository.findByNazwaIgnoreCase(nazwa);
         chrobaByNazwa.ifPresent(choroby -> model.addAttribute("choroba",choroby));
         return chrobaByNazwa.map(choroby -> "singleChoroba").orElse("noChoroba");
+    }
+
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public String deleteChoroba(@PathVariable Long id){
+        chorobyRepository.deleteById(id);
+        return "Usunieto chorobe o id "+id;
     }
 }
