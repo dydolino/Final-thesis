@@ -1,6 +1,7 @@
 package pwr.thesis.thesis.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "choroby")
@@ -46,6 +47,5 @@ public class Choroby {
     public void setDlugosc_operacji(double dlugosc_operacji) {
         Dlugosc_operacji = dlugosc_operacji;
     }
-
 
 }
