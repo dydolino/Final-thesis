@@ -21,14 +21,14 @@ public class ChorobyController {
     private ChorobyService chorobyService;
 
 
-
     @Autowired
     public ChorobyController(ChorobyRepository chorobyRepository, ChorobyService chorobyService) {
         this.chorobyRepository = chorobyRepository;
         this.chorobyService = chorobyService;
     }
 
-    @GetMapping("/")
+
+    @GetMapping("/add")
     public String choroba(Model model) {
         model.addAttribute("choroby", new Choroby());
         return "dodajChorobe";
@@ -43,29 +43,29 @@ public class ChorobyController {
 
     @GetMapping("/allChoroby")
     public String allChoroby(Model model) {
-        List<Choroby> allChorobys=chorobyRepository.findAll();
+        List<Choroby> allChorobys = chorobyRepository.findAll();
         model.addAttribute("choroby", allChorobys);
         return "allChoroby";
     }
 
     @GetMapping("/choroba/{nazwa}")
-    public String getChoroba(Model model, @PathVariable String nazwa){
+    public String getChoroba(Model model, @PathVariable String nazwa) {
         Optional<Choroby> chrobaByNazwa = chorobyRepository.findByNazwaIgnoreCase(nazwa);
-        chrobaByNazwa.ifPresent(choroby -> model.addAttribute("choroba",choroby));
+        chrobaByNazwa.ifPresent(choroby -> model.addAttribute("choroba", choroby));
         return chrobaByNazwa.map(choroby -> "singleChoroba").orElse("noChoroba");
     }
 
     @GetMapping("/delete/{id}")
     @ResponseBody
-    public String deleteChoroba(@PathVariable Long id){
+    public String deleteChoroba(@PathVariable Long id) {
         chorobyRepository.deleteById(id);
-        return "Usunieto chorobe o id "+id;
+        return "Usunieto chorobe o id " + id;
     }
 
     @GetMapping("/update/{id}")
     @ResponseBody
-    public String update(@PathVariable Long id){
+    public String update(@PathVariable Long id) {
         chorobyService.update(id);
-        return "Zaktualizowano obiekt o id "+id;
+        return "Zaktualizowano obiekt o id " + id;
     }
 }

@@ -8,15 +8,23 @@ public class Specjalizacja {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private Integer idSpecjalizacja;
+    private Long idSpecjalizacja;
     private String Nazwa;
     private String Opis;
 
-    public Integer getIdSpecjalizacja() {
+    public Specjalizacja() {
+    }
+
+    public Specjalizacja(String nazwa, String opis) {
+        Nazwa = nazwa;
+        Opis = opis;
+    }
+
+    public Long getIdSpecjalizacja() {
         return idSpecjalizacja;
     }
 
-    public void setIdSpecjalizacja(Integer idSpecjalizacja) {
+    public void setIdSpecjalizacja(Long idSpecjalizacja) {
         this.idSpecjalizacja = idSpecjalizacja;
     }
 

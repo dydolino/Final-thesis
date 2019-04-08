@@ -15,6 +15,16 @@ public class Lekarz {
     @ManyToOne
     private Specjalizacja specjalizacja;
 
+    public Lekarz() {
+    }
+
+    public Lekarz(String imie, String nazwisko, String numerLicencji, Specjalizacja specjalizacja) {
+        Imie = imie;
+        Nazwisko = nazwisko;
+        this.numerLicencji = numerLicencji;
+        this.specjalizacja = specjalizacja;
+    }
+
     public Integer getIdLekarz() {
         return idLekarz;
     }
