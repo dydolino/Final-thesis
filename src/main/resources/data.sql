@@ -39,3 +39,11 @@ insert into wydarzenia(godzina_od,godzina_do,dzien_id_dzien)values
 ('12','14',1),
 ('14','16',2),
 ('17','19',3);
+
+insert into user(username,password,enabled)values
+('admin','{noop}admin',true),
+('user','{noop}user',true);
+
+insert into user_role(username,role)values
+('admin','role_ADMIN'),
+('user','role_USER');
