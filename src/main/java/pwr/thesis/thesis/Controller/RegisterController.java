@@ -27,6 +27,6 @@ public class RegisterController {
     @PostMapping("/saveUser")
     public String addUser(User user) {
         userService.saveUser(user.getUsername(), user.getPassword());
-        return "startPage";
+        return "startPageAfterNewUser";
     }
 }
