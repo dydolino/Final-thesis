@@ -28,7 +28,7 @@ public class ChorobyController {
     }
 
 
-    @GetMapping("/add")
+    @GetMapping("/addChoroby")
     public String choroba(Model model) {
         model.addAttribute("choroby", new Choroby());
         return "dodajChorobe";

@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.Model.Specjalizacja;
 import pwr.thesis.thesis.Repository.SpecjalizacjeRepository;
 
-import java.util.List;
-
 @Controller
 public class SpecjalizacjaController {
 
@@ -19,8 +17,8 @@ public class SpecjalizacjaController {
     }
 
     @GetMapping("/addSpecjalizcja")
-    public String add(Model model){
-        model.addAttribute("specjalizacja",new Specjalizacja());
+    public String add(Model model) {
+        model.addAttribute("specjalizacja", new Specjalizacja());
         return "addSpecjalizacja";
     }
 
