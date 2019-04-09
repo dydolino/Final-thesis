@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Wszystkie choroby</title>
 </head>
 <body>
-<ol>
-    <li th:each="chroba: ${choroby}" th:text="${chroba.nazwa}"></li>
-</ol>
+
+<table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
+    <thead>
+    <tr style="margin: auto">
+        <th>Nazwa choroby</th>
+        <th>Długość operacji</th>
+        <th>Niebezpieczeństwo choroby</th>
+        <th>Usuń</th>
+        <th>Modyfikuj</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="choroba: ${choroby}">
+        <td th:text="${choroba.nazwa}"></td>
+        <td th:text="${choroba.dlugosc_operacji}"></td>
+        <td th:text="${choroba.waga_choroby}"></td>
+        <td><a th:href="${'/delete/' + choroba.idChoroby}" class="btn btn-danger">Usuń</a></td>
+        <td><a th:href="${'/update/' + choroba.idChoroby}" class="btn btn-warning">Modyfikuj</a></td>
+
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

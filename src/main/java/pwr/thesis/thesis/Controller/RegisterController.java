@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.Model.User;
 import pwr.thesis.thesis.Service.UserService;
 
+import java.security.Principal;
+
 @Controller
 public class RegisterController {
 
@@ -25,8 +27,9 @@ public class RegisterController {
     }
 
     @PostMapping("/saveUser")
-    public String addUser(User user) {
+    public String addUser(User user, Principal principal,Model model) {
         userService.saveUser(user.getUsername(), user.getPassword());
+        model.addAttribute("uzytkownik", principal);
         return "startPageAfterNewUser";
     }
 }

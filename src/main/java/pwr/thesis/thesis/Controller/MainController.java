@@ -12,6 +12,6 @@ public class MainController {
     @GetMapping("/")
     public String start(Principal principal, Model model){
         model.addAttribute("uzytkownik", principal);
-        return "startPage";
+        return "startPagepoLogin";
     }
 }

@@ -38,7 +38,7 @@ public class ChorobyController {
     public String addChoroba(Choroby choroby) {
 
         chorobyRepository.save(choroby);
-        return "success";
+        return "startPage";
     }
 
     @GetMapping("/allChoroby")
