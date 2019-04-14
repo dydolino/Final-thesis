@@ -7,19 +7,36 @@
     <title>Rejestracja</title>
 </head>
 <body>
+<div class="alert alert-warning" role="alert" style="align-content: center; margin: auto" >
+    <p class="text-center">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>        <strong>Hej! </strong>  Nieprawidłowy login lub hasło, spróbuj ponownie
+    </p>
+</div>
 
 
-<form th:action="@{/saveUser}" th:object="${user}" method="post" style="width: 300px;margin: auto">
+
+
+<form class="was-validated" th:action="@{/saveUser}" th:object="${user}" method="post" style="width: 300px;margin: auto">
     <div class="form-group">
         <label for="loginNew">Login</label>
         <input name="username" type="text"  class="form-control" id="loginNew" th:field="*{username}" aria-describedby="emailHelp"
-               placeholder="Login">
+               placeholder="Login" required>
+        <small id="loginHelp" class="form-text text-muted">
+            <p>Login musi:</p>
+            <p>- zawierać od 4 do 32 znaków</p>
+            <p>- nie zawierać spacji</p>
+        </small>
     </div>
     <div class="form-group">
         <label for="passwordNew">Hasło</label>
-        <input name="password" type="password" class="form-control" id="passwordNew" th:field="*{password}" placeholder="Hasło">
+        <input name="password" type="password" class="form-control" id="passwordNew" th:field="*{password}" placeholder="Hasło" required>
+        <small id="passwordHelp" class="form-text text-muted">
+            <p>Hasło musi:</p>
+            <p>- zawierać od 4 do 32 znaków</p>
+            <p>- nie zawierać spacji</p>
+        </small>
     </div>
-    <button type="submit" value="Zarejestruj się" class="btn btn-primary">Zarejestruj się</button>
+        <button type="submit" class="btn btn-primary">Zarejestruj</button>
 </form>
 
 </body>
