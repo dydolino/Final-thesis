@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pwr.thesis.thesis.DTOmodel.ChorobyDTO;
 import pwr.thesis.thesis.Model.Choroby;
 import pwr.thesis.thesis.Repository.ChorobyRepository;
 import pwr.thesis.thesis.Service.ChorobyService;
@@ -30,14 +31,13 @@ public class ChorobyController {
 
     @GetMapping("/addChoroby")
     public String choroba(Model model) {
-        model.addAttribute("choroby", new Choroby());
+        model.addAttribute("choroby", new ChorobyDTO());
         return "dodajChorobe";
     }
 
     @PostMapping("save")
-    public String addChoroba(Choroby choroby) {
-
-        chorobyRepository.save(choroby);
+    public String addChoroba(ChorobyDTO choroby) {
+        chorobyService.addChoroba(choroby);
         return "startPage";
     }
 
