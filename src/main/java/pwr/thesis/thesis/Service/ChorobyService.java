@@ -6,6 +6,7 @@ import pwr.thesis.thesis.DTOmodel.ChorobyDTO;
 import pwr.thesis.thesis.Model.Choroby;
 import pwr.thesis.thesis.Repository.ChorobyRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,15 +19,20 @@ public class ChorobyService {
     }
 
     @Transactional
-    public void addChoroba(ChorobyDTO chorobyDTO){
-        //TODO implement validation of duplicated name of Choroba
-            Choroby choroby=new Choroby(chorobyDTO.getNazwa(),chorobyDTO.getWagaChoroby(),chorobyDTO.getDlugoscOperacji());
-            chorobyRepository.save(choroby);
+    public void addChoroba(ChorobyDTO chorobyDTO) {
 
+        Choroby choroby = new Choroby(chorobyDTO.getNazwa(), chorobyDTO.getWagaChoroby(), chorobyDTO.getDlugoscOperacji());
+        chorobyRepository.save(choroby);
     }
 
     @Transactional
-    public void update(Long id){
+    public List<Choroby> allChoroby() {
+        List<Choroby> allChorobyDTO = chorobyRepository.findAll();
+        return allChorobyDTO;
+    }
+
+    @Transactional
+    public void update(Long id) {
         Optional<Choroby> byId = chorobyRepository.findByIdChoroby(id);
         Choroby jedynka = byId.get();
         jedynka.setNazwa("Tetnica");
