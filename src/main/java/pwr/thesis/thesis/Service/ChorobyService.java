@@ -27,8 +27,7 @@ public class ChorobyService {
 
     @Transactional
     public List<Choroby> allChoroby() {
-        List<Choroby> allChorobyDTO = chorobyRepository.findAll();
-        return allChorobyDTO;
+        return chorobyRepository.findAll();
     }
 
     @Transactional

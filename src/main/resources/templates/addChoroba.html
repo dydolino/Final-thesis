@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Wszystkie choroby</title>
+    <title>Dodaj chorobę</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -66,31 +66,40 @@
     </div>
 
 </nav>
+<form class="was-validated" th:action="@{/save}" th:object="${choroby}" method="post" style="width: 300px;margin: auto">
 
+    <div class="form-group">
+        <label for="nazwa">Nazwa choroby</label>
+        <input type="text" class="form-control" id="nazwa" placeholder="Nazwa" th:field="*{nazwa}" required>
+        <small id="NazwaHelp" class="form-text text-muted">
+            Nazwa choroby
+        </small>
+        <div class="invalid-feedback">Podaj nazwe choroby</div>
+    </div>
 
-<table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
-    <thead>
-    <tr style="margin: auto">
-        <th>Nazwa choroby</th>
-        <th>Długość operacji</th>
-        <th>Niebezpieczeństwo choroby</th>
-        <th>Usuń</th>
-        <th>Modyfikuj</th>
+    <div class="form-group">
+        <label for="dlugosc">Długość operacji</label>
+        <input type="number" class="form-control" id="dlugosc" placeholder="Długość operacji"
+               th:field="*{dlugoscOperacji}" required>
+        <small id="dlugoscHelp" class="form-text text-muted">
+            Długość operacji
+        </small>
+        <div class="invalid-feedback">Podaj długość operacji</div>
+    </div>
 
+    <div class="form-group">
+        <label for="waga">Waga choroby</label>
+        <input type="number" class="form-control" id="waga" placeholder="Waga choroby" th:field="*{wagaChoroby}"
+               required>
+        <small id="wagaHelp" class="form-text text-muted">
+            Waga choroby
+        </small>
+        <div class="invalid-feedback">Podaj wagę choroby</div>
+    </div>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="choroba: ${choroby}">
-        <td th:text="${choroba.nazwa}"></td>
-        <td th:text="${choroba.dlugosc_operacji}"></td>
-        <td th:text="${choroba.waga_choroby}"></td>
-        <td><a th:href="${'/delete/' + choroba.idChoroby}" class="btn btn-danger">Usuń</a></td>
-        <td><a th:href="${'/update/' + choroba.idChoroby}" class="btn btn-warning">Modyfikuj</a></td>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
 
-    </tr>
-    </tbody>
-</table>
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
