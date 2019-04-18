@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Modyfikuj chorobę</title>
+    <title>Dodaj chorobę</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -66,19 +66,15 @@
     </div>
 
 </nav>
-<form class="was-validated" th:action="@{/update}" th:object="${choroba}" method="post"
-      style="width: 300px;margin: auto">
-
-    <div class="badge badge-pill badge-light" role="alert" style="align-content: center; margin: auto">
-        <p class="text-center">
-        <h2><i class="fa fa-exclamation-triangle" aria-hidden="true" th:text="*{nazwa}"></i></h2>
-        </p>
-    </div>
+<form class="was-validated" th:action="@{/save}" th:object="${choroby}" method="post" style="width: 300px;margin: auto">
 
     <div class="form-group">
-        <input type="hidden" class="form-control" id="nazwa" placeholder="Nazwa operacji"
-               th:field="*{nazwa}" required>
-
+        <label for="nazwa">Nazwa choroby</label>
+        <input type="text" class="form-control" id="nazwa" placeholder="Nazwa" th:field="*{nazwa}" required>
+        <small id="NazwaHelp" class="form-text text-muted">
+            Nazwa choroby
+        </small>
+        <div class="invalid-feedback">Podaj nazwe choroby</div>
     </div>
 
     <div class="form-group">
@@ -101,7 +97,7 @@
         <div class="invalid-feedback">Podaj wagę choroby</div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Zaktualizuj</button>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
 
 </form>
 

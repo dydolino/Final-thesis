@@ -1,12 +1,19 @@
 package pwr.thesis.thesis.Model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "choroby")
 public class Choroby {
 
+    public Choroby() {
+    }
+
+    public Choroby(String nazwa, int waga_choroby, double dlugosc_operacji) {
+        this.nazwa = nazwa;
+        Waga_choroby = waga_choroby;
+        Dlugosc_operacji = dlugosc_operacji;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
