@@ -12,15 +12,16 @@ import java.util.Optional;
 @Service
 public class ChorobyService {
 
-    private ChorobyRepository chorobyRepository;
+    private final ChorobyRepository chorobyRepository;
+    private final ChorobyDTO chorobyDTO;
 
-    public ChorobyService(ChorobyRepository chorobyRepository) {
+    public ChorobyService(ChorobyRepository chorobyRepository, ChorobyDTO chorobyDTO) {
         this.chorobyRepository = chorobyRepository;
+        this.chorobyDTO = chorobyDTO;
     }
 
     @Transactional
     public void addChoroba(ChorobyDTO chorobyDTO) {
-
         Choroby choroby = new Choroby(chorobyDTO.getNazwa(), chorobyDTO.getWagaChoroby(), chorobyDTO.getDlugoscOperacji());
         chorobyRepository.save(choroby);
     }
@@ -31,9 +32,20 @@ public class ChorobyService {
     }
 
     @Transactional
-    public void update(Long id) {
-        Optional<Choroby> byId = chorobyRepository.findByIdChoroby(id);
-        Choroby jedynka = byId.get();
-        jedynka.setNazwa("Tetnica");
+    public ChorobyDTO findChoroba(String nazwa) {
+        Optional<Choroby> choroby = chorobyRepository.findByNazwaIgnoreCase(nazwa);
+        chorobyDTO.setNazwa(choroby.get().getNazwa());
+        chorobyDTO.setDlugoscOperacji(choroby.get().getDlugosc_operacji());
+        chorobyDTO.setWagaChoroby(choroby.get().getWaga_choroby());
+
+        return chorobyDTO;
+    }
+
+    @Transactional
+    public void update(ChorobyDTO chorobyDTO) {
+        Optional<Choroby> byNazwaIgnoreCase = chorobyRepository.findByNazwaIgnoreCase(chorobyDTO.getNazwa());
+        Choroby update = byNazwaIgnoreCase.get();
+        update.setDlugosc_operacji(chorobyDTO.getDlugoscOperacji());
+        update.setWaga_choroby(chorobyDTO.getWagaChoroby());
     }
 }

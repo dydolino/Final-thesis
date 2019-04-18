@@ -1,7 +1,10 @@
 package pwr.thesis.thesis.DTOmodel;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ChorobyDTO {
+
     private String nazwa;
     private  int wagaChoroby;
     private double dlugoscOperacji;

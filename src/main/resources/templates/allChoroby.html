@@ -74,7 +74,6 @@
         <th>Nazwa choroby</th>
         <th>Długość operacji</th>
         <th>Niebezpieczeństwo choroby</th>
-        <th>Usuń</th>
         <th>Modyfikuj</th>
 
 
@@ -85,8 +84,7 @@
         <td th:text="${choroba.nazwa}"></td>
         <td th:text="${choroba.dlugosc_operacji}"></td>
         <td th:text="${choroba.waga_choroby}"></td>
-        <td><a th:href="${'/delete/' + choroba.idChoroby}" class="btn btn-danger">Usuń</a></td>
-        <td><a th:href="${'/update/' + choroba.idChoroby}" class="btn btn-warning">Modyfikuj</a></td>
+        <td><a th:href="${'/choroba/' + choroba.nazwa}" class="btn btn-warning">Modyfikuj</a></td>
 
     </tr>
     </tbody>
