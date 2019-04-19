@@ -5,27 +5,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.Model.Specjalizacja;
-import pwr.thesis.thesis.Repository.SpecjalizacjeRepository;
+import pwr.thesis.thesis.Repository.SpecjalizacjaRepository;
 
 @Controller
 public class SpecjalizacjaController {
 
-    private SpecjalizacjeRepository specjalizacjeRepository;
+    private SpecjalizacjaRepository specjalizacjaRepository;
 
-    public SpecjalizacjaController(SpecjalizacjeRepository specjalizacjeRepository) {
-        this.specjalizacjeRepository = specjalizacjeRepository;
+    public SpecjalizacjaController(SpecjalizacjaRepository specjalizacjaRepository) {
+        this.specjalizacjaRepository = specjalizacjaRepository;
     }
 
+    //TODO refaktoryzacja - dodanie DTO
     @GetMapping("/addSpecjalizcja")
     public String add(Model model) {
         model.addAttribute("specjalizacja", new Specjalizacja());
         return "addSpecjalizacja";
     }
 
+    //TODO refaktoryzacja - dodanie serwisu
     @PostMapping("saveSpecjalizacja")
     public String addChoroba(Specjalizacja specjalizacja) {
 
-        specjalizacjeRepository.save(specjalizacja);
+        specjalizacjaRepository.save(specjalizacja);
         return "startPage";
     }
 }
