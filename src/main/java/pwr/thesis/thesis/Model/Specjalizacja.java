@@ -9,15 +9,15 @@ public class Specjalizacja {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private Long idSpecjalizacja;
-    private String Nazwa;
+    private String nazwa;
     private String Opis;
 
     public Specjalizacja() {
     }
 
     public Specjalizacja(String nazwa, String opis) {
-        Nazwa = nazwa;
-        Opis = opis;
+        this.nazwa = nazwa;
+        this.Opis = opis;
     }
 
     public Long getIdSpecjalizacja() {
@@ -29,11 +29,11 @@ public class Specjalizacja {
     }
 
     public String getNazwa() {
-        return Nazwa;
+        return nazwa;
     }
 
     public void setNazwa(String nazwa) {
-        Nazwa = nazwa;
+        this.nazwa = nazwa;
     }
 
     public String getOpis() {
