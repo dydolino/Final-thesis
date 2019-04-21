@@ -43,4 +43,6 @@ public class ChorobyService {
         update.setDlugosc_operacji(chorobyDTO.getDlugoscOperacji());
         update.setWaga_choroby(chorobyDTO.getWagaChoroby());
     }
+
+
 }

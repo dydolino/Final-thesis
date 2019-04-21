@@ -14,9 +14,11 @@ import java.util.Optional;
 public class PacjentService {
 
     private PacjentRepository pacjentRepository;
+    private Egz_chorobyService egz_chorobyService;
 
-    public PacjentService(PacjentRepository pacjentRepository) {
+    public PacjentService(PacjentRepository pacjentRepository, Egz_chorobyService egz_chorobyService) {
         this.pacjentRepository = pacjentRepository;
+        this.egz_chorobyService = egz_chorobyService;
     }
 
     @Transactional
@@ -44,5 +46,14 @@ public class PacjentService {
         update.setImie(pacjentDTO.getImie());
         update.setNazwisko(pacjentDTO.getNazwisko());
 
+    }
+
+    @Transactional
+    public boolean delete(String pesel) {
+        Optional<Pacjent> bypeselIgnoreCase = pacjentRepository.findBypeselIgnoreCase(pesel);
+        if (egz_chorobyService.find(bypeselIgnoreCase.get())) {
+            pacjentRepository.delete(bypeselIgnoreCase.get());
+            return true;
+        } else return false;
     }
 }
