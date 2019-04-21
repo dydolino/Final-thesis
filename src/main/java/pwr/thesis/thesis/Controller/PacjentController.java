@@ -56,6 +56,12 @@ public class PacjentController {
         return "allPacjenciError";
     }
 
+    @GetMapping("/allPacjenciErrorChoroby")
+    public String allPacjenciErrorChoroby(Model model) {
+        model.addAttribute("pacjenci", pacjentService.allPacjenci());
+        return "allPacjenciErrorChoroby";
+    }
+
     @GetMapping("/pacjent/{pesel}")
     public String getPacjent(Model model, @PathVariable String pesel) {
         model.addAttribute("pacjent", pacjentService.findPacjent(pesel));

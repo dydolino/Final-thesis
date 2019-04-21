@@ -96,7 +96,7 @@
         <td th:text="${pacjent.PESEL}"></td>
         <td><a th:href="${'/pacjent/' + pacjent.PESEL}" class="btn btn-warning">Modyfikuj</a></td>
         <td><a th:href="${'/deletePacjent/' + pacjent.PESEL}" class="btn btn-warning">Usuń</a></td>
-        <td><a th:href="${'/pacjent/' + pacjent.PESEL}" class="btn btn-warning">Lista</a></td>
+        <td><a th:href="${'/egzChoroby/' + pacjent.PESEL}" class="btn btn-warning">Lista</a></td>
 
     </tr>
     </tbody>
