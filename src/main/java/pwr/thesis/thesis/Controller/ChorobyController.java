@@ -58,6 +58,6 @@ public class ChorobyController {
     @PostMapping("update")
     public String update(ChorobyDTO chorobyDTO) {
         chorobyService.update(chorobyDTO);
-        return "startPage";
+        return "redirect:/allChoroby";
     }
 }

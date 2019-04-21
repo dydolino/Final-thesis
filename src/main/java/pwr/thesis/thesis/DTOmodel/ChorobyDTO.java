@@ -5,6 +5,15 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChorobyDTO {
 
+    public ChorobyDTO() {
+    }
+
+    public ChorobyDTO(String nazwa, int wagaChoroby, double dlugoscOperacji) {
+        this.nazwa = nazwa;
+        this.wagaChoroby = wagaChoroby;
+        this.dlugoscOperacji = dlugoscOperacji;
+    }
+
     private String nazwa;
     private  int wagaChoroby;
     private double dlugoscOperacji;

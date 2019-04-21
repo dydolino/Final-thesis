@@ -5,6 +5,15 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class PacjentDTO {
 
+    public PacjentDTO() {
+    }
+
+    public PacjentDTO(String imie, String nazwisko, String PESEL) {
+        Imie = imie;
+        Nazwisko = nazwisko;
+        this.PESEL = PESEL;
+    }
+
     private String Imie;
     private String Nazwisko;
     private String PESEL;
