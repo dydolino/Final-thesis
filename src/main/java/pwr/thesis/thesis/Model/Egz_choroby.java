@@ -1,7 +1,7 @@
 package pwr.thesis.thesis.Model;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "egz_choroby")
@@ -13,7 +13,7 @@ public class Egz_choroby {
     private Integer idEgz_choroby;
     @ManyToOne
     private Choroby choroby;
-    private SimpleDateFormat data_rozpoznania;
+    private LocalDateTime data_rozpoznania;
     @ManyToOne
     private Pacjent pacjent;
 
@@ -33,11 +33,11 @@ public class Egz_choroby {
         this.choroby = choroby;
     }
 
-    public SimpleDateFormat getData_rozpoznania() {
+    public LocalDateTime getData_rozpoznania() {
         return data_rozpoznania;
     }
 
-    public void setData_rozpoznania(SimpleDateFormat data_rozpoznania) {
+    public void setData_rozpoznania(LocalDateTime data_rozpoznania) {
         this.data_rozpoznania = data_rozpoznania;
     }
 

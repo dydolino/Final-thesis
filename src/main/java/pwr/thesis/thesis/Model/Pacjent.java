@@ -6,13 +6,22 @@ import javax.persistence.*;
 @Table(name = "pacjent")
 public class Pacjent {
 
+    public Pacjent() {
+    }
+
+    public Pacjent(String imie, String nazwisko, String PESEL) {
+        Imie = imie;
+        Nazwisko = nazwisko;
+        this.pesel = PESEL;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private Integer idPacjent;
     private String Imie;
     private String Nazwisko;
-    private String PESEL;
+    private String pesel;
 
     public Integer getIdPacjent() {
         return idPacjent;
@@ -39,10 +48,10 @@ public class Pacjent {
     }
 
     public String getPESEL() {
-        return PESEL;
+        return pesel;
     }
 
     public void setPESEL(String PESEL) {
-        this.PESEL = PESEL;
+        this.pesel = PESEL;
     }
 }

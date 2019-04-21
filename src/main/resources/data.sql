@@ -1,6 +1,7 @@
 insert into pacjent(Imie,Nazwisko,PESEL)values
 ('Aleksander','Dytko','96012508418'),
-('Alina','Dabrowska','94082308418');
+('Aleksander','Kopytko','1234222'),
+('Alina','Dabrowska','12121212');
 
 insert into choroby(nazwa, Waga_choroby, Dlugosc_operacji) values
 ('Rak nieborak','9','2.6'),

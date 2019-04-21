@@ -13,11 +13,10 @@ import java.util.Optional;
 public class ChorobyService {
 
     private final ChorobyRepository chorobyRepository;
-    private final ChorobyDTO chorobyDTO;
 
-    public ChorobyService(ChorobyRepository chorobyRepository, ChorobyDTO chorobyDTO) {
+
+    public ChorobyService(ChorobyRepository chorobyRepository) {
         this.chorobyRepository = chorobyRepository;
-        this.chorobyDTO = chorobyDTO;
     }
 
     @Transactional
@@ -34,11 +33,7 @@ public class ChorobyService {
     @Transactional
     public ChorobyDTO findChoroba(String nazwa) {
         Optional<Choroby> choroby = chorobyRepository.findByNazwaIgnoreCase(nazwa);
-        chorobyDTO.setNazwa(choroby.get().getNazwa());
-        chorobyDTO.setDlugoscOperacji(choroby.get().getDlugosc_operacji());
-        chorobyDTO.setWagaChoroby(choroby.get().getWaga_choroby());
-
-        return chorobyDTO;
+        return new ChorobyDTO(choroby.get().getNazwa(), choroby.get().getWaga_choroby(), choroby.get().getDlugosc_operacji());
     }
 
     @Transactional
@@ -48,4 +43,6 @@ public class ChorobyService {
         update.setDlugosc_operacji(chorobyDTO.getDlugoscOperacji());
         update.setWaga_choroby(chorobyDTO.getWagaChoroby());
     }
+
+
 }

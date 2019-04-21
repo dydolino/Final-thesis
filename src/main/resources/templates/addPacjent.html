@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Dodaj lekarza</title>
+    <title>Dodaj pacjenta</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -69,52 +69,35 @@
     </div>
 </nav>
 
-<form class="was-validated" th:action="@{/saveLekarz}" th:object="${lekarz}" method="post"
+<form class="was-validated" th:action="@{/savePacjent}" th:object="${pacjent}" method="post"
       style="width: 300px;margin: auto">
 
     <div class="form-group">
         <label for="name">Imie</label>
         <input type="text" class="form-control" id="name" placeholder="Imie" th:field="*{imie}" required>
         <small id="imieHelp" class="form-text text-muted">
-            Imie lekarza
+            Imie pajenta
         </small>
         <div class="invalid-feedback">Podaj imie</div>
     </div>
 
     <div class="form-group">
-        <label for="price">Nazwisko</label>
-        <input type="text" class="form-control" id="price" placeholder="Nazwisko" th:field="*{nazwisko}" required>
+        <label for="nazwisko">Nazwisko</label>
+        <input type="text" class="form-control" id="nazwisko" placeholder="Nazwisko" th:field="*{nazwisko}" required>
         <small id="nazwiskoHelp" class="form-text text-muted">
-            Nazwisko lekarza
+            Nazwisko pacjenta
         </small>
         <div class="invalid-feedback">Podaj nazwisko</div>
     </div>
 
     <div class="form-group">
-        <label for="price">Numer licencji</label>
-        <input type="text" class="form-control" id="licenceNo" placeholder="Numer licencji" th:field="*{numerLicencji}"
+        <label for="pesel">Numer licencji</label>
+        <input type="text" class="form-control" id="pesel" placeholder="Numer licencji" th:field="*{PESEL}"
                required>
         <small id="licencjaHelp" class="form-text text-muted">
-            Numer licencji
+            Numer PESEL
         </small>
-        <div class="invalid-feedback">Podaj numer licencji</div>
-    </div>
-
-    <div class="form-group">
-        <label for="price">Specjalizacja</label>
-
-        <select th:field="*{specjalizacja}" class="custom-select" required>
-            <option value="">Kliknij by wybrać specjalizacje</option>
-            <option th:each="specjalizacja : ${specjlaizacje}"
-                    th:value="${specjalizacja.idSpecjalizacja}"
-                    th:text="${specjalizacja.nazwa}">
-            </option>
-
-        </select>
-        <small id="specjalizacjaHelp" class="form-text text-muted">
-            Specjalizacja lekarza.
-        </small>
-        <div class="invalid-feedback">Wybierz specjalizacje</div>
+        <div class="invalid-feedback">Podaj numer PESEL</div>
     </div>
 
     <button type="submit" class="btn btn-primary">Dodaj</button>
