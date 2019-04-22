@@ -18,6 +18,16 @@ public class Operacja {
     private Lekarz lekarz;
     @ManyToOne
     private Sala sala;
+    @OneToOne
+    private Wydarzenia wydarzenia;
+
+    public Wydarzenia getWydarzenia() {
+        return wydarzenia;
+    }
+
+    public void setWydarzenia(Wydarzenia wydarzenia) {
+        this.wydarzenia = wydarzenia;
+    }
 
     public Integer getIdOperacja() {
         return idOperacja;

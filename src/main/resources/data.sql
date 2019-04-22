@@ -32,14 +32,14 @@ insert into dzien(numer_dnia,sala_id_sala) values
 (2,2),
 (3,3);
 
-insert into operacja(egz_choroby_id_egz_choroby,lekarz_id_lekarz,pacjent_id_pacjent,sala_id_sala) values
-(1,1,1,1),
-(2,2,2,2);
-
 insert into wydarzenia(godzina_od,godzina_do,dzien_id_dzien)values
 ('12','14',1),
 ('14','16',2),
 ('17','19',3);
+
+insert into operacja(egz_choroby_id_egz_choroby,lekarz_id_lekarz,pacjent_id_pacjent,sala_id_sala, wydarzenia_id_wydarzenia) values
+(1,1,1,1,1),
+(2,2,2,2,2);
 
 insert into user(username,password,enabled)values
 ('admin','{noop}admin',true),
