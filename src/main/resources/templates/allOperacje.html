@@ -89,7 +89,7 @@
         <td th:text="${operacja.lekarz.imie+' '+operacja.lekarz.nazwisko}"></td>
         <td th:text="${operacja.sala.getNumer_sali()}"></td>
         <td th:text="${operacja.wydarzenia.getGodzina_od()+' - '+operacja.wydarzenia.getGodzina_do()}"></td>
-        <td th:text="${operacja.wydarzenia.getDzien().getNumerDnia()}"></td>
+        <td th:text="${operacja.wydarzenia.getDzien().getNumerDnia()+' - '+operacja.wydarzenia.dzien.miesiac.getNumerMiesiaca()}"></td>
         <!--<td><a th:href="${'/choroba/' + choroba.nazwa}" class="btn btn-warning">Modyfikuj</a></td>-->
 
     </tr>

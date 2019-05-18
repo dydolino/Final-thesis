@@ -21,4 +21,8 @@ public class OperacjaController {
         model.addAttribute("operacje", operacjaService.findAll());
         return "allOperacje";
     }
+
+    //TODO addOperacja
+
+    //TODO modifyOperacja
 }

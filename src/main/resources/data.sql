@@ -27,7 +27,13 @@ insert into sala(numer_sali, numer_pietra) values
 (2,5),
 (3,5);
 
-insert into dzien(numer_dnia,sala_id_sala) values
+insert into miesiac(numer_miesiaca,sala_id_sala)values
+(1,1),
+(1,2),
+(1,3),
+(2,1);
+
+insert into dzien(numer_dnia,miesiac_id_miesiac) values
 (1,1),
 (2,2),
 (3,3);

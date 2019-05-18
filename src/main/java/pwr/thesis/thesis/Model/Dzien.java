@@ -12,7 +12,7 @@ public class Dzien {
     private Integer idDzien;
     private Integer numerDnia;
     @ManyToOne
-    private Sala sala;
+    private Miesiac miesiac;
 
     public Integer getIdDzien() {
         return idDzien;
@@ -22,12 +22,12 @@ public class Dzien {
         this.idDzien = idDzien;
     }
 
-    public Sala getSala() {
-        return sala;
+    public Miesiac getMiesiac() {
+        return miesiac;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
+    public void setMiesiac(Miesiac miesiac) {
+        this.miesiac = miesiac;
     }
 
     public Integer getNumerDnia() {
