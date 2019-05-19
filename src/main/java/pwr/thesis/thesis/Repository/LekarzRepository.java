@@ -9,4 +9,6 @@ public interface LekarzRepository extends JpaRepository<Lekarz,Long> {
 
 
     Optional<Lekarz> findByNumerLicencjiIgnoreCase(String string);
+
+    Lekarz findByNumerLicencji(String s);
 }

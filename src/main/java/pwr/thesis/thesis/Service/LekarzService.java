@@ -6,6 +6,8 @@ import pwr.thesis.thesis.DTOmodel.LekarzDTO;
 import pwr.thesis.thesis.Model.Lekarz;
 import pwr.thesis.thesis.Repository.LekarzRepository;
 
+import java.util.List;
+
 @Service
 public class LekarzService {
 
@@ -19,5 +21,10 @@ public class LekarzService {
     public void addLekarz(LekarzDTO lekarzDTO) {
         Lekarz lekarz = new Lekarz(lekarzDTO.getImie(), lekarzDTO.getNazwisko(), lekarzDTO.getNumerLicencji(), lekarzDTO.getSpecjalizacja());
         lekarzRepository.save(lekarz);
+    }
+
+    @Transactional
+    public List<Lekarz> findAll() {
+        return lekarzRepository.findAll();
     }
 }

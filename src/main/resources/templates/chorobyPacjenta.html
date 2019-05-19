@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Wszyscy pacjenci</title>
+    <title>Choroby pacjenta</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -71,24 +71,16 @@
 <table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
     <thead>
     <tr style="margin: auto">
-        <th>Imie</th>
-        <th>Nazwisko</th>
-        <th>PESEL</th>
-        <th>Modyfikuj</th>
-        <th>Usuń</th>
-        <th>Lista operacji</th>
+        <th>Nazwa choroby</th>
+        <th>Data rozpoznania</th>
 
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="pacjent: ${pacjenci}">
-        <td th:text="${pacjent.imie}"></td>
-        <td th:text="${pacjent.nazwisko}"></td>
-        <td th:text="${pacjent.PESEL}"></td>
-        <td><a th:href="${'/pacjent/' + pacjent.PESEL}" class="btn btn-warning">Modyfikuj</a></td>
-        <td><a th:href="${'/deletePacjent/' + pacjent.PESEL}" class="btn btn-warning">Usuń</a></td>
-        <td><a th:href="${'/egzChoroby/' + pacjent.PESEL}" class="btn btn-warning">Lista</a></td>
+    <tr th:each="choroba: ${egzChoroby}">
+        <td th:text="${choroba.choroby.nazwa}"></td>
+        <td th:text="${choroba.data_rozpoznania}"></td>
 
     </tr>
     </tbody>

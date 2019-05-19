@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Wszyscy pacjenci</title>
+    <title>Dodaj pacjenta</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Rezerwacja sal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +20,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dodaj" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Dodaj 🆕
+                    Dodaj
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/addChoroby">Choroba</a>
@@ -33,30 +36,30 @@
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="usun" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Usuń 🚮
+                    Usuń
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Chorobę</a>
+                    <a class="dropdown-item" href="/delete/1">Chorobę</a>
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="modyfikuj" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Modyfikuj 🔧
+                    Modyfikuj
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Chorobę</a>
+                    <a class="dropdown-item" href="/update/1">Chorobę</a>
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="wyswietl" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Wyświetl 💻
+                    Wyświetl
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/allChoroby">Choroby</a>
@@ -64,35 +67,32 @@
             </li>
         </ul>
     </div>
-
 </nav>
 
-
-<table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
-    <thead>
-    <tr style="margin: auto">
-        <th>Imie</th>
-        <th>Nazwisko</th>
-        <th>PESEL</th>
-        <th>Modyfikuj</th>
-        <th>Usuń</th>
-        <th>Lista operacji</th>
+<form class="was-validated" th:action="@{/addOperacja1}" th:object="${operacja}" method="get"
+      style="width: 300px;margin: auto">
 
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pacjent: ${pacjenci}">
-        <td th:text="${pacjent.imie}"></td>
-        <td th:text="${pacjent.nazwisko}"></td>
-        <td th:text="${pacjent.PESEL}"></td>
-        <td><a th:href="${'/pacjent/' + pacjent.PESEL}" class="btn btn-warning">Modyfikuj</a></td>
-        <td><a th:href="${'/deletePacjent/' + pacjent.PESEL}" class="btn btn-warning">Usuń</a></td>
-        <td><a th:href="${'/egzChoroby/' + pacjent.PESEL}" class="btn btn-warning">Lista</a></td>
+    <div class="form-group">
+        <!--<input id="pacjent">
+        <label for="pacjent"></label>-->
 
-    </tr>
-    </tbody>
-</table>
+        <select th:field="*{pacjentPESEL}" class="custom-select" required>
+            <option value="">Kliknij by wybrać pacjenta</option>
+            <option th:each="pacjent : ${pacjenci}"
+                    th:value="${pacjent.getPESEL()}"
+                    th:text="${pacjent.imie+' '+pacjent.nazwisko}">
+            </option>
+
+        </select>
+        <small id="specjalizacjaHelp" class="form-text text-muted">
+            Imie i nazwisko pacjenta.
+        </small>
+        <div class="invalid-feedback">Wybierz pacjenta</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Dalej</button>
+
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

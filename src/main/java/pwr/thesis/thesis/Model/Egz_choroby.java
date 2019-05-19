@@ -9,7 +9,7 @@ public class Egz_choroby {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(unique = true, name = "id_egz_choroby")
     private Integer idEgz_choroby;
     @ManyToOne
     private Choroby choroby;

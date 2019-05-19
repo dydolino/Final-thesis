@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Wszyscy pacjenci</title>
+    <title>Wszystkie operacje</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -39,7 +39,7 @@
                     Usuń 🚮
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Chorobę</a>
+                    <a class="dropdown-item" href="/delete/1">Chorobę</a>
                 </div>
             </li>
 
@@ -49,7 +49,7 @@
                     Modyfikuj 🔧
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Chorobę</a>
+                    <a class="dropdown-item" href="/update/1">Chorobę</a>
                 </div>
             </li>
 
@@ -71,24 +71,26 @@
 <table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
     <thead>
     <tr style="margin: auto">
-        <th>Imie</th>
-        <th>Nazwisko</th>
-        <th>PESEL</th>
+        <th>Pacjent</th>
+        <th>Choroba</th>
+        <th>Lekarz</th>
+        <th>Sala</th>
+        <th>Godziny operacji</th>
+        <th>Data operacji</th>
         <th>Modyfikuj</th>
-        <th>Usuń</th>
-        <th>Lista operacji</th>
 
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="pacjent: ${pacjenci}">
-        <td th:text="${pacjent.imie}"></td>
-        <td th:text="${pacjent.nazwisko}"></td>
-        <td th:text="${pacjent.PESEL}"></td>
-        <td><a th:href="${'/pacjent/' + pacjent.PESEL}" class="btn btn-warning">Modyfikuj</a></td>
-        <td><a th:href="${'/deletePacjent/' + pacjent.PESEL}" class="btn btn-warning">Usuń</a></td>
-        <td><a th:href="${'/egzChoroby/' + pacjent.PESEL}" class="btn btn-warning">Lista</a></td>
+    <tr th:each="operacja: ${operacje}">
+        <td th:text="${operacja.egz_choroby.pacjent.imie+' '+operacja.egz_choroby.pacjent.nazwisko}"></td>
+        <td th:text="${operacja.egz_choroby.choroby.nazwa}"></td>
+        <td th:text="${operacja.lekarz.imie+' '+operacja.lekarz.nazwisko}"></td>
+        <td th:text="${operacja.sala.getNumer_sali()}"></td>
+        <td th:text="${operacja.wydarzenia.getGodzina_od()+' - '+operacja.wydarzenia.getGodzina_do()}"></td>
+        <td th:text="${operacja.wydarzenia.getDzien().getNumerDnia()+' - '+operacja.wydarzenia.dzien.miesiac.getNumerMiesiaca()}"></td>
+        <!--<td><a th:href="${'/choroba/' + choroba.nazwa}" class="btn btn-warning">Modyfikuj</a></td>-->
 
     </tr>
     </tbody>

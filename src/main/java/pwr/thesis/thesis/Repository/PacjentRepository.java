@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface PacjentRepository extends JpaRepository<Pacjent, Long> {
     Optional<Pacjent> findBypeselIgnoreCase(String pesel);
+
+    Pacjent findBypesel(String pesel);
 }
