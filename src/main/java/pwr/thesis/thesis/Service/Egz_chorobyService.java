@@ -34,4 +34,9 @@ public class Egz_chorobyService {
     public List<Egz_choroby> findAll(String pesel) {
         return egz_chorobyRepository.findAllBypacjent(pacjentRepository.findBypeselIgnoreCase(pesel));
     }
+
+    @Transactional
+    public Egz_choroby findById(Integer egz_chorobyID) {
+        return egz_chorobyRepository.findById(egz_chorobyID).get();
+    }
 }
