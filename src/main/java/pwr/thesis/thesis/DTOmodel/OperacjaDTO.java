@@ -1,21 +1,40 @@
 package pwr.thesis.thesis.DTOmodel;
 
 import org.springframework.stereotype.Controller;
-import pwr.thesis.thesis.Model.*;
 
 @Controller
 public class OperacjaDTO {
 
-
-    private Pacjent pacjent;
-    private Egz_choroby egz_choroby;
-    private Lekarz lekarz;
-    private Sala sala;
-    private Wydarzenia wydarzenia;
-
     private String pacjentPESEL;
     private Integer egz_chorobyID;
     private String numerLicencji;
+    private Integer numerSali;
+    private String Data;
+    private String TimeFrom;
+
+    public String getTimeFrom() {
+        return TimeFrom;
+    }
+
+    public void setTimeFrom(String timeFrom) {
+        TimeFrom = timeFrom;
+    }
+
+    public String getData() {
+        return Data;
+    }
+
+    public void setData(String data) {
+        Data = data;
+    }
+
+    public Integer getNumerSali() {
+        return numerSali;
+    }
+
+    public void setNumerSali(Integer numerSali) {
+        this.numerSali = numerSali;
+    }
 
     public String getNumerLicencji() {
         return numerLicencji;
@@ -39,45 +58,5 @@ public class OperacjaDTO {
 
     public void setPacjentPESEL(String pacjentPESEL) {
         this.pacjentPESEL = pacjentPESEL;
-    }
-
-    public Pacjent getPacjent() {
-        return pacjent;
-    }
-
-    public void setPacjent(Pacjent pacjent) {
-        this.pacjent = pacjent;
-    }
-
-    public Egz_choroby getEgz_choroby() {
-        return egz_choroby;
-    }
-
-    public void setEgz_choroby(Egz_choroby egz_choroby) {
-        this.egz_choroby = egz_choroby;
-    }
-
-    public Lekarz getLekarz() {
-        return lekarz;
-    }
-
-    public void setLekarz(Lekarz lekarz) {
-        this.lekarz = lekarz;
-    }
-
-    public Sala getSala() {
-        return sala;
-    }
-
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
-
-    public Wydarzenia getWydarzenia() {
-        return wydarzenia;
-    }
-
-    public void setWydarzenia(Wydarzenia wydarzenia) {
-        this.wydarzenia = wydarzenia;
     }
 }
