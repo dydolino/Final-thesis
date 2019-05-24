@@ -14,6 +14,14 @@ public class Dzien {
     @ManyToOne
     private Miesiac miesiac;
 
+    public Dzien() {
+    }
+
+    public Dzien(Integer numerDnia, Miesiac miesiac) {
+        this.numerDnia = numerDnia;
+        this.miesiac = miesiac;
+    }
+
     public Integer getIdDzien() {
         return idDzien;
     }

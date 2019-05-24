@@ -77,7 +77,7 @@
 
 
         <select th:field="*{egz_chorobyID}" class="custom-select" required>
-            <option value="">Kliknij by wybrać pacjenta</option>
+            <option value="">Kliknij by wybrać chorobę operacyjną</option>
             <option th:each="egzemplarz : ${egzeplarze}"
                     th:value="${egzemplarz.idEgz_choroby}"
                     th:text="${egzemplarz.choroby.nazwa}">
@@ -85,9 +85,9 @@
 
         </select>
         <small id="specjalizacjaHelp" class="form-text text-muted">
-            Imie i nazwisko pacjenta.
+            Choroba operacyjna.
         </small>
-        <div class="invalid-feedback">Wybierz pacjenta</div>
+        <div class="invalid-feedback">Wybierz chorobę</div>
     </div>
 
     <div class="form-group" style="visibility: hidden">

@@ -5,8 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "operacja")
 public class Operacja {
-    public Operacja() {
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +22,10 @@ public class Operacja {
     @OneToOne
     private Wydarzenia wydarzenia;
 
-    public Operacja(Egz_choroby egz_choroby, Pacjent pacjent, Lekarz lekarz) {
-        this.pacjent = pacjent;
-        this.egz_choroby = egz_choroby;
-        this.lekarz = lekarz;
+    public Operacja() {
     }
 
-    public Operacja(Pacjent pacjent, Egz_choroby egz_choroby, Lekarz lekarz, Sala sala, Wydarzenia wydarzenia) {
+    public Operacja(Egz_choroby egz_choroby, Pacjent pacjent, Lekarz lekarz, Sala sala, Wydarzenia wydarzenia) {
         this.pacjent = pacjent;
         this.egz_choroby = egz_choroby;
         this.lekarz = lekarz;

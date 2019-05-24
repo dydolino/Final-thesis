@@ -17,6 +17,15 @@ public class Wydarzenia {
     @OneToOne
     private Operacja operacja;
 
+    public Wydarzenia() {
+    }
+
+    public Wydarzenia(String godzina_od, String godzina_do, Dzien dzien) {
+        this.godzina_od = godzina_od;
+        this.godzina_do = godzina_do;
+        this.dzien = dzien;
+    }
+
     public Integer getIdWydarzenia() {
         return idWydarzenia;
     }

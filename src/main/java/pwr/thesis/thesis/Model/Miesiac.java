@@ -14,6 +14,14 @@ public class Miesiac {
     @ManyToOne
     private Sala sala;
 
+    public Miesiac() {
+    }
+
+    public Miesiac(Integer numerMiesiaca, Sala sala) {
+        this.numerMiesiaca = numerMiesiaca;
+        this.sala = sala;
+    }
+
     public Integer getIdMiesiac() {
         return idMiesiac;
     }
