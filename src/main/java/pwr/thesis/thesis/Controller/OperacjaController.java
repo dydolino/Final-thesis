@@ -72,7 +72,7 @@ public class OperacjaController {
         //TODO implementacja operacjaValidator
         if (bindingResult.hasErrors()) {
             //TODO co jesli sala jest wtedy zajeta
-            return "";
+            return "/addOperacja4";
         } else {
         operacjaService.addOperacja(operacja);
             return "redirect:/allOperacje";

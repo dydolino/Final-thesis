@@ -4,9 +4,9 @@ insert into pacjent(Imie,Nazwisko,PESEL)values
 ('Alina','Dabrowska','12121212');
 
 insert into choroby(nazwa, Waga_choroby, Dlugosc_operacji) values
-('Rak nieborak','9','2.6'),
-('Uszkodzona tetnica','5','2.5'),
-('Gruzlica','4','2');
+('Rak nieborak','9','2.45'),
+('Uszkodzona tetnica','5','2.50'),
+('Gruzlica','4','2.20');
 
 
 insert into egz_choroby(data_rozpoznania, choroby_id_choroby,pacjent_id_pacjent) values
