@@ -66,16 +66,21 @@ public class OperacjaController {
     @GetMapping("/addOperacja4")
     public String addOperacja4(OperacjaDTO operacja, Model model) {
         model.addAttribute("operacja", operacja);
-        model.addAttribute("sale", salaService.findAll());
         return "addOperacja4";
     }
 
+    @GetMapping("/addOperacjaDoubled")
+    public String addOperacjaDoubled(OperacjaDTO operacja, Model model) {
+        model.addAttribute("operacja", operacja);
+        return "addOperacjaDoubled";
+    }
+
     @PostMapping("saveOperacja")
-    public String saveOper(OperacjaDTO operacja, BindingResult bindingResult) {
+    public String saveOper(OperacjaDTO operacja, BindingResult bindingResult, Model model) {
         operacjaValidator.validate(operacja, bindingResult);
         if (bindingResult.hasErrors()) {
-            //TODO co jesli sala jest wtedy zajeta
-            return "redirect:/addOperacja4";
+            model.addAttribute("operacja", operacja);
+            return "addOperacjaDoubled";
         } else {
         operacjaService.addOperacja(operacja);
             return "redirect:/allOperacje";
