@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.DTOmodel.OperacjaDTO;
 import pwr.thesis.thesis.Service.*;
+import pwr.thesis.thesis.validator.OperacjaValidator;
 
 @Controller
 public class OperacjaController {
@@ -16,14 +17,16 @@ public class OperacjaController {
     private Egz_chorobyService egz_chorobyService;
     private LekarzService lekarzService;
     private SalaService salaService;
+    private OperacjaValidator operacjaValidator;
 
 
-    public OperacjaController(OperacjaService operacjaService, PacjentService pacjentService, Egz_chorobyService egz_chorobyService, LekarzService lekarzService, SalaService salaService) {
+    public OperacjaController(OperacjaService operacjaService, PacjentService pacjentService, Egz_chorobyService egz_chorobyService, LekarzService lekarzService, SalaService salaService, OperacjaValidator operacjaValidator) {
         this.operacjaService = operacjaService;
         this.pacjentService = pacjentService;
         this.egz_chorobyService = egz_chorobyService;
         this.lekarzService = lekarzService;
         this.salaService = salaService;
+        this.operacjaValidator = operacjaValidator;
     }
 
     @GetMapping("/allOperacje")
@@ -69,10 +72,10 @@ public class OperacjaController {
 
     @PostMapping("saveOperacja")
     public String saveOper(OperacjaDTO operacja, BindingResult bindingResult) {
-        //TODO implementacja operacjaValidator
+        operacjaValidator.validate(operacja, bindingResult);
         if (bindingResult.hasErrors()) {
             //TODO co jesli sala jest wtedy zajeta
-            return "/addOperacja4";
+            return "redirect:/addOperacja4";
         } else {
         operacjaService.addOperacja(operacja);
             return "redirect:/allOperacje";

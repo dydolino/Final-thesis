@@ -6,7 +6,6 @@ import pwr.thesis.thesis.DTOmodel.OperacjaDTO;
 import pwr.thesis.thesis.Model.*;
 import pwr.thesis.thesis.Repository.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -54,7 +53,7 @@ public class OperacjaService {
     }
 
 
-    private String lenghtSurgery(String[] parts, String timeFrom, double howLong) {
+    public String lenghtSurgery(String[] parts, String timeFrom, double howLong) {
         int[] data = Arrays.stream(parts).mapToInt(Integer::parseInt).toArray();
         String[] arr = String.valueOf(howLong).split("\\.");
         Integer[] lenght = {Integer.valueOf(arr[0]), Integer.valueOf(arr[1])};
@@ -65,11 +64,10 @@ public class OperacjaService {
     }
 
 
-    private Calendar addTime(int[] data, Integer[] timeFrom, Integer[] lenght) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+    private Calendar addTime(int[] data, Integer[] timeFrom, Integer[] length) {
         Calendar calendar = new GregorianCalendar(data[0], data[1] - 1, data[2], timeFrom[0], timeFrom[1]);
-        calendar.add(Calendar.HOUR_OF_DAY, lenght[0]);
-        calendar.add(Calendar.MINUTE, lenght[1]);
+        calendar.add(Calendar.HOUR_OF_DAY, length[0]);
+        calendar.add(Calendar.MINUTE, length[1]);
 
         return calendar;
     }

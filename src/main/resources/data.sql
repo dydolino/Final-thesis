@@ -39,9 +39,9 @@ insert into dzien(numer_dnia,miesiac_id_miesiac) values
 (3,3);
 
 insert into wydarzenia(godzina_od,godzina_do,dzien_id_dzien)values
-('12','14',1),
-('14','16',2),
-('17','19',3);
+('12:00','14:00',1),
+('14:00','16:00',2),
+('17:00','19:30',3);
 
 insert into operacja(egz_choroby_id_egz_choroby,lekarz_id_lekarz,pacjent_id_pacjent,sala_id_sala, wydarzenia_id_wydarzenia) values
 (1,1,1,1,1),
