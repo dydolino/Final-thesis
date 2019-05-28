@@ -6,6 +6,9 @@ import pwr.thesis.thesis.DTOmodel.OperacjaDTO;
 import pwr.thesis.thesis.Model.*;
 import pwr.thesis.thesis.Repository.*;
 
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -20,7 +23,7 @@ public class OperacjaService {
     private DzienRepository dzienRepository;
     private WydarzeniaRepository wydarzeniaRepository;
 
-    public OperacjaService(OperacjaRepository operacjaRepository, Egz_chorobyService egz_chorobyService, PacjentService pacjentService, PacjentRepository pacjentRepository, LekarzRepository lekarzRepository, SalaRepository salaRepository, MiesiacRepository miesiacRepository, DzienRepository dzienRepository, WydarzeniaRepository wydarzeniaRepository) {
+    public OperacjaService(OperacjaRepository operacjaRepository, Egz_chorobyService egz_chorobyService, PacjentRepository pacjentRepository, LekarzRepository lekarzRepository, SalaRepository salaRepository, MiesiacRepository miesiacRepository, DzienRepository dzienRepository, WydarzeniaRepository wydarzeniaRepository) {
         this.operacjaRepository = operacjaRepository;
         this.egz_chorobyService = egz_chorobyService;
         this.pacjentRepository = pacjentRepository;
@@ -45,15 +48,27 @@ public class OperacjaService {
         String[] parts = operacja.getData().split("-");
         Miesiac miesiac = miesiacRepository.save(new Miesiac(Integer.valueOf(parts[1]), sala));
         Dzien dzien = dzienRepository.save(new Dzien(Integer.valueOf(parts[2]), miesiac));
-        Wydarzenia wydarzenia = wydarzeniaRepository.save(new Wydarzenia(operacja.getTimeFrom(), addHours(operacja.getTimeFrom(), egz_choroby.getChoroby().getDlugosc_operacji()), dzien));
+        Wydarzenia wydarzenia = wydarzeniaRepository.save(new Wydarzenia(operacja.getTimeFrom(), lenghtSurgery(parts, operacja.getTimeFrom(), egz_choroby.getChoroby().getDlugosc_operacji()), dzien));
         operacjaRepository.save(new Operacja(egz_choroby, pacjent, lekarz, sala, wydarzenia));
     }
 
-    private String addHours(String timeFrom, double howLong) {
-        String[] godzina = timeFrom.split(":");
+
+    public String lenghtSurgery(String[] parts, String timeFrom, double howLong) {
+        int[] data = Arrays.stream(parts).mapToInt(Integer::parseInt).toArray();
         String[] arr = String.valueOf(howLong).split("\\.");
-        Integer h = Integer.valueOf(godzina[0]) + Integer.parseInt(arr[0]);
-        Integer m = Integer.valueOf(godzina[1]) + Integer.parseInt(arr[1]);
-        return String.join(":", String.valueOf(h), String.valueOf(m));
+        Integer[] lenght = {Integer.valueOf(arr[0]), Integer.valueOf(arr[1])};
+        String[] godzina = timeFrom.split(":");
+        Integer[] time = {Integer.valueOf(godzina[0]), Integer.valueOf(godzina[1])};
+        Calendar calendar = addTime(data, time, lenght);
+        return String.join(":", String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)), String.valueOf(calendar.get(Calendar.MINUTE)));
+    }
+
+
+    private Calendar addTime(int[] data, Integer[] timeFrom, Integer[] length) {
+        Calendar calendar = new GregorianCalendar(data[0], data[1] - 1, data[2], timeFrom[0], timeFrom[1]);
+        calendar.add(Calendar.HOUR_OF_DAY, length[0]);
+        calendar.add(Calendar.MINUTE, length[1]);
+
+        return calendar;
     }
 }

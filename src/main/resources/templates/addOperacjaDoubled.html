@@ -69,34 +69,56 @@
     </div>
 </nav>
 
-<form class="was-validated" th:action="@{/addOperacja3}" th:object="${operacja}" method="get"
+<div class="alert alert-warning" role="alert">
+    <p class="text-center">
+        Nie można dodać operacji - sala operacyjna jest zajęta w tym czasie. Wybierz inny czas lub termin
+    </p>
+
+
+</div>
+
+
+<form class="was-validated" th:action="@{/saveOperacja}" th:object="${operacja}" method="post"
       style="width: 300px;margin: auto">
 
     <div class="form-group">
-
-        <select th:field="*{numerLicencji}" class="custom-select" required>
-            <option value="">Kliknij by wybrać lekarza</option>
-            <option th:each="lekarz : ${lekarze}"
-                    th:value="${lekarz.numerLicencji}"
-                    th:text="${lekarz.imie+' '+lekarz.nazwisko}">
-            </option>
-
-        </select>
-        <small id="specjalizacjaHelp" class="form-text text-muted">
-            Imie i nazwisko lekarza.
+        <label for="miesiac">Numer miesiaca</label>
+        <input type="date" class="form-control" id="miesiac" placeholder="Numer miesiaca"
+               th:field="*{data}" required>
+        <small id="miesiacHelp" class="form-text text-muted">
+            Numer miesiąca
         </small>
-        <div class="invalid-feedback">Wybierz lekarza</div>
+        <div class="invalid-feedback">Podaj numer miesiąca</div>
     </div>
 
+    <div class="form-group">
+        <label for="odGodzina">Godzina od</label>
+        <input type="time" class="form-control" id="odGodzina" placeholder="Godzina od" th:field="*{timeFrom}"
+               required>
+        <small id="odHelp" class="form-text text-muted">
+            Godzina rozpoczęcia.
+        </small>
+        <div class="invalid-feedback">Podaj godzine, o której ma zacząć się operacja</div>
+    </div>
     <button type="submit" class="btn btn-primary">Dodaj</button>
 
+
     <div class="form-group" style="visibility: hidden">
-        <input type="text" class="form-control" id="nazwisko" placeholder="Nazwisko" th:field="*{pacjentPESEL}">
+        <input type="text" class="form-control" id="pesel" placeholder="PESEL" th:field="*{pacjentPESEL}">
     </div>
 
     <div class="form-group" style="visibility: hidden">
-        <input type="text" class="form-control" id="pesel" placeholder="Numer licencji" th:field="*{egz_chorobyID}">
+        <input type="text" class="form-control" id="choroba" placeholder="choroba" th:field="*{egz_chorobyID}">
     </div>
+
+    <div class="form-group" style="visibility: hidden">
+        <input type="text" class="form-control" id="lekarz" placeholder="lekarz" th:field="*{numerLicencji}">
+    </div>
+
+    <div class="form-group" style="visibility: hidden">
+        <input type="text" class="form-control" id="sala" placeholder="sala" th:field="*{numerSali}">
+    </div>
+
 
 </form>
 
