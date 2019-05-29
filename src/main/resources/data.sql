@@ -28,15 +28,15 @@ insert into sala(numer_sali, numer_pietra) values
 (3,5);
 
 insert into miesiac(numer_miesiaca,sala_id_sala)values
-(1,1),
-(1,2),
-(1,3),
-(2,1);
+(01,1),
+(01,2),
+(01,3),
+(02,1);
 
 insert into dzien(numer_dnia,miesiac_id_miesiac) values
-(1,1),
-(2,2),
-(3,3);
+(01,1),
+(02,2),
+(03,3);
 
 insert into wydarzenia(godzina_od,godzina_do,dzien_id_dzien)values
 ('12:00','14:00',1),

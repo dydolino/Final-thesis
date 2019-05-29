@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pwr.thesis.thesis.DTOmodel.OperacjaDTO;
 import pwr.thesis.thesis.Service.*;
@@ -87,5 +88,32 @@ public class OperacjaController {
         }
     }
 
-    //TODO modifyOperacja
+    @GetMapping("/operacja/{id}")
+    public String getOperacja(Model model, @PathVariable Integer id) {
+        model.addAttribute("operacja", operacjaService.findOperacja(id));
+        model.addAttribute("lekarze", lekarzService.findAll());
+        model.addAttribute("sale", salaService.findAll());
+        return "updateOperacja";
+    }
+
+    @PostMapping("updateOperacja")
+    public String updateOperacja(OperacjaDTO operacja, BindingResult bindingResult, Model model) {
+        operacjaValidator.validate(operacja, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("operacja", operacja);
+            model.addAttribute("lekarze", lekarzService.findAll());
+            model.addAttribute("sale", salaService.findAll());
+            return "updateOperacjaDuplicaded";
+        } else {
+            operacjaService.update(operacja);
+            return "redirect:/allOperacje";
+        }
+    }
+
+    @GetMapping("/deleteOperacja/{id}")
+    public String deleteOperacja(@PathVariable Integer id) {
+        operacjaService.delete(id);
+
+        return "redirect:/allOperacje";
+    }
 }

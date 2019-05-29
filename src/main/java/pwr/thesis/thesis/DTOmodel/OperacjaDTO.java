@@ -11,6 +11,29 @@ public class OperacjaDTO {
     private Integer numerSali;
     private String Data;
     private String TimeFrom;
+    private Integer idOperacjii;
+
+    public OperacjaDTO() {
+    }
+
+    public OperacjaDTO(String pacjentPESEL, Integer egz_chorobyID, String numerLicencji, Integer numerSali, String data, String timeFrom) {
+        this.pacjentPESEL = pacjentPESEL;
+        this.egz_chorobyID = egz_chorobyID;
+        this.numerLicencji = numerLicencji;
+        this.numerSali = numerSali;
+        this.Data = data;
+        TimeFrom = timeFrom;
+    }
+
+    public OperacjaDTO(String pacjentPESEL, Integer egz_chorobyID, String numerLicencji, Integer numerSali, String data, String timeFrom, Integer idOperacjii) {
+        this.pacjentPESEL = pacjentPESEL;
+        this.egz_chorobyID = egz_chorobyID;
+        this.numerLicencji = numerLicencji;
+        this.numerSali = numerSali;
+        this.Data = data;
+        TimeFrom = timeFrom;
+        this.idOperacjii = idOperacjii;
+    }
 
     public String getTimeFrom() {
         return TimeFrom;
@@ -25,7 +48,15 @@ public class OperacjaDTO {
     }
 
     public void setData(String data) {
-        Data = data;
+        this.Data = data;
+    }
+
+    public Integer getIdOperacjii() {
+        return idOperacjii;
+    }
+
+    public void setIdOperacjii(Integer idOperacjii) {
+        this.idOperacjii = idOperacjii;
     }
 
     public Integer getNumerSali() {

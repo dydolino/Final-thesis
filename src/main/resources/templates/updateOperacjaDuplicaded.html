@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Wszystkie operacje</title>
+    <title>Dodaj pacjenta</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Rezerwacja sal</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +20,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dodaj" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Dodaj 🆕
+                    Dodaj
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/addChoroby">Choroba</a>
@@ -33,30 +36,30 @@
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="usun" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Usuń 🚮
+                    Usuń
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/delete/1">Chorobę</a>
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="modyfikuj" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Modyfikuj 🔧
+                    Modyfikuj
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/update/1">Chorobę</a>
                 </div>
             </li>
 
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="wyswietl" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Wyświetl 💻
+                    Wyświetl
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/allChoroby">Choroby</a>
@@ -64,39 +67,83 @@
             </li>
         </ul>
     </div>
-
 </nav>
 
-
-<table class="table table-striped" style="width: 1000px;margin:auto; color: darkblue">
-    <thead>
-    <tr style="margin: auto">
-        <th>Pacjent</th>
-        <th>Choroba</th>
-        <th>Lekarz</th>
-        <th>Sala</th>
-        <th>Godziny operacji</th>
-        <th>Data operacji</th>
-        <th>Modyfikuj</th>
-        <th>Usuń operację</th>
+<div class="alert alert-warning" role="alert">
+    <p class="text-center">
+        Nie można dodać operacji - sala operacyjna jest zajęta w tym czasie. Wybierz inny czas, termin lub salę.
+    </p>
 
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="operacja: ${operacje}">
-        <td th:text="${operacja.egz_choroby.pacjent.imie+' '+operacja.egz_choroby.pacjent.nazwisko}"></td>
-        <td th:text="${operacja.egz_choroby.choroby.nazwa}"></td>
-        <td th:text="${operacja.lekarz.imie+' '+operacja.lekarz.nazwisko}"></td>
-        <td th:text="${operacja.sala.getNumer_sali()}"></td>
-        <td th:text="${operacja.wydarzenia.getGodzina_od()+' - '+operacja.wydarzenia.getGodzina_do()}"></td>
-        <td th:text="${operacja.wydarzenia.getDzien().getNumerDnia()+' - '+operacja.wydarzenia.dzien.miesiac.getNumerMiesiaca()}"></td>
-        <td><a th:href="${'/operacja/' + operacja.getIdOperacja()}" class="btn btn-warning">Modyfikuj</a></td>
-        <td><a th:href="${'/deleteOperacja/' + operacja.getIdOperacja()}" class="btn btn-danger">Usuń</a></td>
+</div>
 
-    </tr>
-    </tbody>
-</table>
+<form class="was-validated" th:action="@{/updateOperacja}" th:object="${operacja}" method="post"
+      style="width: 300px;margin: auto">
+
+    <select th:field="*{numerLicencji}" class="custom-select" required>
+        <option value="">Kliknij by wybrać lekarza</option>
+        <option th:each="lekarz : ${lekarze}"
+                th:value="${lekarz.numerLicencji}"
+                th:text="${lekarz.imie+' '+lekarz.nazwisko}">
+        </option>
+
+    </select>
+    <small id="specjalizacjaHelp" class="form-text text-muted">
+        Imie i nazwisko lekarza.
+    </small>
+    <div class="invalid-feedback">Wybierz lekarza</div>
+    </div>
+
+    <div class="form-group">
+        <label for="miesiac"></label>
+        <input type="date" class="form-control" id="miesiac" placeholder="Numer miesiaca"
+               th:field="*{data}" required>
+        <small id="miesiacHelp" class="form-text text-muted">
+            Data operacji
+        </small>
+        <div class="invalid-feedback">Wybierz datę operacji</div>
+    </div>
+
+    <div class="form-group">
+        <label for="odGodzina"></label>
+        <input type="time" class="form-control" id="odGodzina" placeholder="Godzina od" th:field="*{timeFrom}"
+               required>
+        <small id="odHelp" class="form-text text-muted">
+            Godzina rozpoczęcia.
+        </small>
+        <div class="invalid-feedback">Podaj godzine, o której ma zacząć się operacja</div>
+    </div>
+
+    <select th:field="*{numerSali}" class="custom-select" required>
+        <option value="">Kliknij by wybrać salę</option>
+        <option th:each="sala : ${sale}"
+                th:value="${sala.numer_sali}"
+                th:text="${sala.numer_sali}">
+        </option>
+
+    </select>
+    <small id="salaHelp" class="form-text text-muted">
+        Numer sali.
+    </small>
+    <div class="invalid-feedback">Wybierz salę</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+
+    <div class="form-group" style="visibility: hidden">
+        <input type="text" class="form-control" id="pesel" placeholder="PESEL" th:field="*{pacjentPESEL}">
+    </div>
+
+    <div class="form-group" style="visibility: hidden">
+        <input type="text" class="form-control" id="choroba" placeholder="choroba" th:field="*{egz_chorobyID}">
+    </div>
+
+    <div class="form-group" style="visibility: hidden">
+        <input type="text" class="form-control" id="idOperacja" placeholder="choroba" th:field="*{idOperacjii}">
+    </div>
+
+
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
