@@ -6,10 +6,7 @@ import pwr.thesis.thesis.DTOmodel.OperacjaDTO;
 import pwr.thesis.thesis.Model.*;
 import pwr.thesis.thesis.Repository.*;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OperacjaService {
@@ -70,5 +67,41 @@ public class OperacjaService {
         calendar.add(Calendar.MINUTE, length[1]);
 
         return calendar;
+    }
+
+    @Transactional
+    public void update(OperacjaDTO operacjaDTO) {
+        Operacja operacja = operacjaRepository.findById(operacjaDTO.getIdOperacjii()).get();
+        String[] parts = operacjaDTO.getData().split("-");
+        operacja.setLekarz(lekarzRepository.findByNumerLicencji(operacjaDTO.getNumerLicencji()));
+        operacja.setSala(salaRepository.findByNumerSali(operacjaDTO.getNumerSali()));
+        operacja.getWydarzenia().setGodzina_od(operacjaDTO.getTimeFrom());
+        operacja.getWydarzenia().setGodzina_do(lenghtSurgery(parts, operacjaDTO.getTimeFrom(), operacja.getEgz_choroby().getChoroby().getDlugosc_operacji()));
+        operacja.getWydarzenia().getDzien().getMiesiac().setNumerMiesiaca(Integer.valueOf(parts[1]));
+        operacja.getWydarzenia().getDzien().setNumerDnia(Integer.valueOf(parts[2]));
+
+    }
+
+
+    @Transactional
+    public OperacjaDTO findOperacja(Integer id) {
+        Optional<Operacja> operacja = operacjaRepository.findById(id);
+        String month;
+        String day;
+        if (operacja.get().getWydarzenia().getDzien().getMiesiac().getNumerMiesiaca() < 10) {
+            month = "0" + String.valueOf(operacja.get().getWydarzenia().getDzien().getMiesiac().getNumerMiesiaca());
+        } else month = String.valueOf(operacja.get().getWydarzenia().getDzien().getMiesiac().getNumerMiesiaca());
+
+        if (operacja.get().getWydarzenia().getDzien().getNumerDnia() < 10) {
+            day = "0" + String.valueOf(operacja.get().getWydarzenia().getDzien().getNumerDnia());
+        } else day = String.valueOf(operacja.get().getWydarzenia().getDzien().getNumerDnia());
+
+        String join = String.join("-", "2019", month, day);
+        return new OperacjaDTO(operacja.get().getPacjent().getPESEL(), operacja.get().getEgz_choroby().getIdEgz_choroby(), operacja.get().getLekarz().getNumerLicencji(), operacja.get().getSala().getNumer_sali(), join, operacja.get().getWydarzenia().getGodzina_od(), operacja.get().getIdOperacja());
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        operacjaRepository.deleteById(id);
     }
 }
