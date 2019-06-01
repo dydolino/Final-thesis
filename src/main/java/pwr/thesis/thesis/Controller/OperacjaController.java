@@ -83,7 +83,7 @@ public class OperacjaController {
             model.addAttribute("operacja", operacja);
             return "addOperacjaDoubled";
         } else {
-        operacjaService.addOperacja(operacja);
+            operacjaService.addOperacja(operacja);
             return "redirect:/allOperacje";
         }
     }

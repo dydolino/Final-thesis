@@ -5,6 +5,4 @@ import pwr.thesis.thesis.Model.Operacja;
 
 public interface OperacjaRepository extends JpaRepository<Operacja, Integer> {
 
-    Operacja findByIdOperacja(Integer id);
-
 }
